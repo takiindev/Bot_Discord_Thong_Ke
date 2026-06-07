@@ -1,0 +1,21 @@
+# Các thư viện cài đặt tự động (Koyeb/Render sẽ tự install, không đẩy lên Git)
+node_modules/
+
+# File cấu hình biến môi trường (Chứa Token Discord, ID Google Sheet bảo mật)
+.env
+
+# File chứng chỉ Google API chạy ở máy Local (Đã chuyển sang dạng chuỗi trên Env Cloud)
+credentials.json
+
+# File log hệ thống và lỗi phát sinh nếu có
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Thư mục cấu hình của trình soạn thảo code (nếu bạn dùng VS Code)
+.vscode/
+.DS_Store
+
+data
+main

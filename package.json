@@ -1,0 +1,26 @@
+{
+  "name": "discord-voice-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.17.0",
+    "@googleapis/sheets": "^13.0.2",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "google-auth-library": "^10.7.0",
+    "googleapis": "^173.0.0",
+    "libsodium-wrappers": "^0.7.13"
+  }
+}

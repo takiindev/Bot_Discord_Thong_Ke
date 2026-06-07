@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đọc Sheet data và Tải JSON</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #output { background: #f8f8f8; padding: 15px; border: 1px solid #ccc; max-height: 400px; overflow-y: scroll; white-space: pre-wrap; }
+        .btn { padding: 10px 20px; cursor: pointer; border: none; border-radius: 4px; color: white; margin-right: 10px; }
+        .read-btn { background: #007bff; }
+        .down-btn { background: #28a745; display: none; }
+    </style>
+</head>
+<body>
+
+    <h2>Đọc trang "data"</h2>
+    <button class="btn read-btn" onclick="readData()">1. Đọc dữ liệu</button>
+    <button id="downloadBtn" class="btn down-btn" onclick="downloadJSON()">2. Tải file JSON xuống</button>
+
+    <h3>Kết quả:</h3>
+    <div id="output">Chờ dữ liệu...</div>
+
+    <script>
+        let currentData = null;
+        const SHEET_ID = '1O3uasywzvhnFEL8XHt5pNvjVNi9nx2i3jckl08vqRnw';
+        const SHEET_NAME = 'data';
+
+        function readData() {
+            const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+            Papa.parse(csvUrl, {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    currentData = results.data;
+                    document.getElementById('output').innerText = JSON.stringify(currentData, null, 2);
+                    document.getElementById('downloadBtn').style.display = 'inline-block';
+                }
+            });
+        }
+
+        function downloadJSON() {
+            if (!currentData) return;
+            const blob = new Blob([JSON.stringify(currentData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'data_export.json';
+            a.click();
+        }
+    </script>
+</body>
+</html>
